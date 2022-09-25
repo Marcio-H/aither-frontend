@@ -1,18 +1,18 @@
 <p-menubar [model]="itens">
   <ng-template pTemplate="start">
-    <img src="assets/logo.png" height="40" class="mr-2">
+    <img src="assets/logo.png" height="40" class="mr-2" />
   </ng-template>
   <ng-template pTemplate="end">
-    <button *ngIf="!isAuthenticated; else buttonLogout" pButton type="button" label="Entrar" pRipple (click)="openLoginRegisterComponent()"></button>
+    <button
+      *ngIf="!isAuthenticated; else buttonLogout"
+      pButton
+      type="button"
+      label="Entrar"
+      pRipple
+      (click)="openLoginRegisterComponent()"
+    ></button>
     <ng-template #buttonLogout>
-      <button
-        pButton
-        type="button"
-        class="p-button-danger"
-        pRipple
-        label="Sair"
-        (click)="logout()"
-      ></button>
+      <button pButton type="button" class="p-button-danger" pRipple label="Sair" (click)="logout()"></button>
     </ng-template>
   </ng-template>
 </p-menubar>

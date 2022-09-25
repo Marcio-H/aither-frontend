@@ -5,6 +5,7 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build",
+    "lint:fix": "eslint ./ --ext .ts --fix",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
@@ -30,6 +31,9 @@
     "@angular/cli": "~14.2.1",
     "@angular/compiler-cli": "^14.0.0",
     "@types/jasmine": "~4.0.0",
+    "@typescript-eslint/eslint-plugin": "^5.38.0",
+    "@typescript-eslint/parser": "^5.38.0",
+    "eslint": "^8.24.0",
     "jasmine-core": "~4.3.0",
     "karma": "~6.4.0",
     "karma-chrome-launcher": "~3.1.0",
@@ -37,6 +41,35 @@
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
     "ng-packagr": "^14.2.0",
+    "prettier": "2.7.1",
     "typescript": "~4.7.2"
+  },
+  "vsc-organize-imports": {
+    "orderSpecifiers": false,
+    "orderSpecifiersAsSingleLine": false,
+    "baseUrl": "projects",
+    "emptyLinesAfterImports": 1,
+    "emptyLinesBetweenFilledGroups": 1,
+    "removeUnusedImports": true,
+    "groups": [
+      {
+        "groups": [
+          "global",
+          "absolute",
+          "relative"
+        ],
+        "sortBy": "name",
+        "emptyLines": true
+      },
+      {
+        "groups": [
+          "globalDirect",
+          "absoluteDirect",
+          "relativeDirect"
+        ],
+        "sortBy": "path",
+        "emptyLines": true
+      }
+    ]
   }
 }

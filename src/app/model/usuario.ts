@@ -1,8 +1,7 @@
 export interface Usuario {
-
-	id?: number;
+  id?: number;
   name: string;
-	username: string;
-	password: string;
-	enabled?: boolean;
+  username: string;
+  password: string;
+  enabled?: boolean;
 }

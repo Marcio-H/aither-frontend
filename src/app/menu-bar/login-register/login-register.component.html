@@ -1,20 +1,15 @@
-
 <div class="p-1">
-  <p-tabView >
+  <p-tabView>
     <p-tabPanel header="Entrar">
-      <form
-        [formGroup]="loginForm"
-        (ngSubmit)="login()"
-        class="w-18rem"
-      >
+      <form [formGroup]="loginForm" (ngSubmit)="login()" class="w-18rem">
         <div class="mt-3">
           <span class="p-float-label">
             <input
               pInputText
               type="text"
+              id="input-username-login"
               class="w-full"
               [class.ng-dirty]="loginForm.controls['username'].dirty"
-              id="input-username-login"
               formControlName="username"
             />
             <label for="input-username-login">Email *</label>
@@ -33,44 +28,47 @@
           </span>
         </div>
         <div class="flex justify-content-between">
-          <button pButton type="button" label="Sair" class="p-button-raised p-button-text" pRipple (click)="exit()"></button>
+          <button
+            pButton
+            type="button"
+            label="Sair"
+            class="p-button-raised p-button-text"
+            pRipple
+            (click)="exit()"
+          ></button>
           <button pButton type="submit" label="Enviar" pRipple></button>
         </div>
       </form>
     </p-tabPanel>
     <p-tabPanel header="Cadastrar-se">
-      <form
-        [formGroup]="registerForm"
-        (ngSubmit)="register()"
-        class="w-18rem"
-      >
-      <div class="mt-3">
-        <span class="p-float-label p-fluid">
-          <input
-            pInputText
-            type="text"
-            [class.ng-dirty]="registerForm.controls['name'].dirty"
-            id="input-name-register"
-            formControlName="name"
-          />
-          <label for="input-name-register">Nome *</label>
-        </span>
-      </div>
-      <div class="my-4">
-        <span class="p-float-label p-fluid">
-          <input
-            pInputText
-            type="text"
-            [class.ng-dirty]="registerForm.controls['username'].dirty"
-            id="input-username-register"
-            formControlName="username"
-          />
-          <label for="input-username-register">Email *</label>
-        </span>
-      </div>
-      <div class="my-4">
-        <span class="p-float-label p-fluid">
-          <p-password
+      <form [formGroup]="registerForm" (ngSubmit)="register()" class="w-18rem">
+        <div class="mt-3">
+          <span class="p-float-label p-fluid">
+            <input
+              pInputText
+              type="text"
+              [class.ng-dirty]="registerForm.controls['name'].dirty"
+              id="input-name-register"
+              formControlName="name"
+            />
+            <label for="input-name-register">Nome *</label>
+          </span>
+        </div>
+        <div class="my-4">
+          <span class="p-float-label p-fluid">
+            <input
+              pInputText
+              type="text"
+              [class.ng-dirty]="registerForm.controls['username'].dirty"
+              id="input-username-register"
+              formControlName="username"
+            />
+            <label for="input-username-register">Email *</label>
+          </span>
+        </div>
+        <div class="my-4">
+          <span class="p-float-label p-fluid">
+            <p-password
               [class.ng-dirty]="registerForm.controls['password'].dirty"
               type="password"
               id="input-password-register"
@@ -78,14 +76,21 @@
               [feedback]="true"
               formControlName="password"
             ></p-password>
-          <label for="input-password-register">Senha *</label>
-        </span>
-      </div>
-      <div class="flex justify-content-between">
-        <button pButton type="button" label="Sair" class="p-button-raised p-button-text" pRipple (click)="exit()"></button>
-        <button pButton type="submit" label="Enviar" pRipple></button>
-      </div>
-    </form>
+            <label for="input-password-register">Senha *</label>
+          </span>
+        </div>
+        <div class="flex justify-content-between">
+          <button
+            pButton
+            type="button"
+            label="Sair"
+            class="p-button-raised p-button-text"
+            pRipple
+            (click)="exit()"
+          ></button>
+          <button pButton type="submit" label="Enviar" pRipple></button>
+        </div>
+      </form>
     </p-tabPanel>
   </p-tabView>
 </div>

@@ -16,25 +16,20 @@ import { MenuBarComponent } from 'src/app/menu-bar/menu-bar.component';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 
 @NgModule({
-  declarations: [
-    MenuBarComponent,
-    LoginRegisterComponent
-  ],
-  imports: [
-    CommonModule,
-    BrowserModule,
-    BrowserAnimationsModule,
-    MenubarModule,
-    ButtonModule,
-    RippleModule,
-    DynamicDialogModule,
-    TabViewModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    PasswordModule
-  ],
-  exports: [
-    MenuBarComponent
-  ]
+	declarations: [MenuBarComponent, LoginRegisterComponent],
+	imports: [
+		CommonModule,
+		BrowserModule,
+		BrowserAnimationsModule,
+		MenubarModule,
+		ButtonModule,
+		RippleModule,
+		DynamicDialogModule,
+		TabViewModule,
+		ReactiveFormsModule,
+		InputTextModule,
+		PasswordModule,
+	],
+	exports: [MenuBarComponent],
 })
-export class MenuBarModule { }
+export class MenuBarModule {}

@@ -1,4 +1,4 @@
 export interface EnvironmentAuth {
-  production: boolean,
-  apiUrl: string
+  production: boolean;
+  apiUrl: string;
 }
