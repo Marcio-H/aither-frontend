@@ -13,19 +13,19 @@ import { RippleModule } from 'primeng/ripple';
 import { ToastModule } from 'primeng/toast';
 
 @NgModule({
-	declarations: [AppComponent, MainComponent],
-	imports: [
-		AuthModule.forRoot(environment),
-		AppRoutingModule,
-		BrowserModule,
-		BrowserAnimationsModule,
-		ButtonModule,
-		HttpClientModule,
-		MenuBarModule,
-		RippleModule,
-		ToastModule,
-	],
-	providers: [],
-	bootstrap: [AppComponent],
+  declarations: [AppComponent, MainComponent],
+  imports: [
+    AuthModule.forRoot(environment),
+    AppRoutingModule,
+    BrowserModule,
+    BrowserAnimationsModule,
+    ButtonModule,
+    HttpClientModule,
+    MenuBarModule,
+    RippleModule,
+    ToastModule,
+  ],
+  providers: [],
+  bootstrap: [AppComponent],
 })
 export class AppModule {}

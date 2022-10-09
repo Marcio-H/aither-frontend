@@ -1,0 +1,44 @@
+<div *ngIf="loadingInit" class="flex justify-content-center align-items-center w-full h-full">
+  <p-progressSpinner styleClass="full-page-spinner"></p-progressSpinner>
+</div>
+
+<div *ngIf="!loadingInit" class="t-container">
+  <form [formGroup]="disciplinaForm" (ngSubmit)="submit()">
+    <div class="p-card shadow-none">
+      <div class="col-12">
+        <span class="p-float-label">
+          <input
+            id="descricao-input"
+            type="text"
+            pInputText
+            formControlName="descricao"
+            [class.ng-dirty]="disciplinaForm.controls['descricao'].dirty"
+          >
+          <label for="descricao-input">Descrição *</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <p-fileUpload
+          #fileUpload
+          [accept]="'image/png'"
+          (onSelect)="onFileUploadSelect($event.files)"
+          [multiple]="false"
+          [showUploadButton]="false"
+          [files]="files"
+          (onRemove)="removeFile($event.file)"
+          [class.dirty]="disciplinaForm.controls['imagem'].dirty"
+        >
+          <ng-template pTemplate="content">
+            <div *ngIf="disciplinaForm.controls['imagem'].dirty" class="dirty">* Arquivo é obrigatório</div>
+          </ng-template>
+        </p-fileUpload>
+      </div>
+    </div>
+
+    <div class="flex flex-row justify-content-between pt-1 pr-3 pl-3">
+      <ui-button label="Voltar" (click)="return()" outlined></ui-button>
+      <ui-button label="Salvar" type="submit"></ui-button>
+    </div>
+  </form>
+</div>

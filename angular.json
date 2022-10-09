@@ -129,6 +129,37 @@
           }
         }
       }
+    },
+    "aither-ui": {
+      "projectType": "library",
+      "root": "projects/aither-ui",
+      "sourceRoot": "projects/aither-ui/src",
+      "prefix": "lib",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:ng-packagr",
+          "options": {
+            "project": "projects/aither-ui/ng-package.json"
+          },
+          "configurations": {
+            "production": {
+              "tsConfig": "projects/aither-ui/tsconfig.lib.prod.json"
+            },
+            "development": {
+              "tsConfig": "projects/aither-ui/tsconfig.lib.json"
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/aither-ui/src/test.ts",
+            "tsConfig": "projects/aither-ui/tsconfig.spec.json",
+            "karmaConfig": "projects/aither-ui/karma.conf.js"
+          }
+        }
+      }
     }
   },
   "cli": {

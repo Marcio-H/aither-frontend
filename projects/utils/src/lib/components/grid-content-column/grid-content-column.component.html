@@ -1,0 +1,23 @@
+<ng-container [ngSwitch]="type">
+  <ng-container *ngSwitchCase="'boolean'">
+    <p-inputSwitch [ngModel]="value == true" [disabled]="true"></p-inputSwitch>
+  </ng-container>
+  <ng-container *ngSwitchCase="'double'">
+    <ng-template>{{ value | number: '1.2-2' }}</ng-template>
+  </ng-container>
+  <ng-container *ngSwitchCase="'percent'">
+    <ng-template>{{ value | number: '1.2-2' }}%</ng-template>
+  </ng-container>
+  <ng-container *ngSwitchCase="'money'">
+    <ng-template>{{ value | currency: 'BRL':'symbol':'1.2-2' }}</ng-template>
+  </ng-container>
+  <ng-container *ngSwitchCase="'date'">
+    <ng-template>{{ value | date: 'dd/MM/yyyy' }}</ng-template>
+  </ng-container>
+  <ng-container *ngSwitchCase="'dateTime'">
+    <ng-template>{{ value | date: 'dd/MM/yyyy HH:mm' }}</ng-template>
+  </ng-container>
+  <ng-container *ngSwitchDefault>
+    {{ value }}
+  </ng-container>
+</ng-container>

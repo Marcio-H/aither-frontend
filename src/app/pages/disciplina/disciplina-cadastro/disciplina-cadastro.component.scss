@@ -1,0 +1,15 @@
+:host ::ng-deep {
+  .dirty {
+    > .p-fileupload {
+      .p-fileupload-buttonbar {
+        border: 1px solid #e24c4c;
+      }
+
+      .p-fileupload-content {
+        border: 1px solid #e24c4c;
+      }
+    }
+
+    color: #e24c4c;
+  }
+}

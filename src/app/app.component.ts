@@ -1,18 +1,17 @@
-import { AuthService } from 'utils';
 import { Component, OnInit } from '@angular/core';
 import { PrimeNGConfig } from 'primeng/api';
 
 @Component({
-	selector: 'app-root',
-	templateUrl: './app.component.html',
-	styleUrls: ['./app.component.sass'],
+  selector: 'app-root',
+  templateUrl: './app.component.html',
+  styleUrls: ['./app.component.sass'],
 })
 export class AppComponent implements OnInit {
-	title = 'aither-frontend';
+  title = 'aither-frontend';
 
-	constructor(private primeNgConfig: PrimeNGConfig) {}
+  constructor(private primeNgConfig: PrimeNGConfig) {}
 
-	ngOnInit(): void {
-		this.primeNgConfig.ripple = true;
-	}
+  ngOnInit(): void {
+    this.primeNgConfig.ripple = true;
+  }
 }

@@ -12,29 +12,29 @@ import { AuthService } from './service/auth.service';
 export const ENVIRONMENT_AUTH_TOKEN = new InjectionToken<EnvironmentAuth>('ENVIRONMENT_AUTH_TOKEN');
 
 @NgModule({
-	declarations: [],
-	imports: [CommonModule, HttpClientModule, ToastModule],
-	providers: [
-		{
-			provide: HTTP_INTERCEPTORS,
-			useClass: ApiInterceptor,
-			multi: true,
-		},
-		AuthService,
-		MessageService,
-	],
-	bootstrap: [],
+  declarations: [],
+  imports: [CommonModule, HttpClientModule, ToastModule],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: ApiInterceptor,
+      multi: true,
+    },
+    AuthService,
+    MessageService,
+  ],
+  bootstrap: [],
 })
 export class AuthModule {
-	static forRoot(environment: EnvironmentAuth): ModuleWithProviders<AuthModule> {
-		return {
-			ngModule: AuthModule,
-			providers: [
-				{
-					provide: ENVIRONMENT_AUTH_TOKEN,
-					useValue: environment,
-				},
-			],
-		};
-	}
+  static forRoot(environment: EnvironmentAuth): ModuleWithProviders<AuthModule> {
+    return {
+      ngModule: AuthModule,
+      providers: [
+        {
+          provide: ENVIRONMENT_AUTH_TOKEN,
+          useValue: environment,
+        },
+      ],
+    };
+  }
 }
