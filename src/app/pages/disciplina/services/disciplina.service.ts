@@ -1,9 +1,10 @@
+import { buildSearchParams, PageResult } from 'utils';
 import { Disciplina } from '../model/disciplina';
+import { DisciplinaAutoComplete } from '../model/disciplina-auto-complete';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { Observable, take } from 'rxjs';
-import { buildSearchParams, PageResult } from 'utils';
 
 @Injectable()
 export class DisciplinaService {
@@ -13,6 +14,12 @@ export class DisciplinaService {
 
   atualizarDisciplina(disciplina: Disciplina): Observable<Disciplina> {
     return this.http.put<Disciplina>(`${this.url}/${disciplina.id}`, this.buildFormData(disciplina)).pipe(take(1));
+  }
+
+  autoComplete(query: string, event?: LazyLoadEvent): Observable<PageResult<DisciplinaAutoComplete>> {
+    const params = buildSearchParams(event, query);
+
+    return this.http.get<PageResult<DisciplinaAutoComplete>>(`${this.url}/autoComplete`, { params }).pipe(take(1));
   }
 
   buscarDisciplinaPorId(id: string): Observable<Disciplina> {

@@ -1,5 +1,5 @@
-import { DisciplinaCadastroComponent } from './cadastro/disciplina-cadastro.component';
-import { DisciplinaListaComponent } from './lista/disciplina-lista.component';
+import { ConteudoCadastroComponent } from './cadastro/conteudo-cadastro.component';
+import { ConteudoListaComponent } from './lista/conteudo-lista.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 
@@ -9,15 +9,15 @@ const routes: Routes = [
     children: [
       {
         path: '',
-        component: DisciplinaListaComponent,
+        component: ConteudoListaComponent,
       },
       {
         path: 'cadastro',
-        component: DisciplinaCadastroComponent,
+        component: ConteudoCadastroComponent,
       },
       {
         path: 'cadastro/:id',
-        component: DisciplinaCadastroComponent,
+        component: ConteudoCadastroComponent,
       },
     ],
   },
@@ -27,4 +27,4 @@ const routes: Routes = [
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
 })
-export class DisciplinaRoutingModule {}
+export class ConteudoRoutingModule {}

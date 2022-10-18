@@ -9,6 +9,10 @@ const routes: Routes = [
     path: 'disciplina',
     loadChildren: () => import('./pages/disciplina/disciplina.module').then((m) => m.DisciplinaModule),
   },
+  {
+    path: 'conteudo',
+    loadChildren: () => import('./pages/conteudo/conteudo.module').then((m) => m.ConteudoModule),
+  },
 ];
 
 @NgModule({

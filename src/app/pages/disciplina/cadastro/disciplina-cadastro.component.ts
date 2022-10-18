@@ -1,7 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component, ViewChildren } from '@angular/core';
+import { Component, Optional, ViewChildren } from '@angular/core';
 import { Disciplina } from '../model/disciplina';
 import { DisciplinaService } from '../services/disciplina.service';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { FileUpload } from 'primeng/fileupload';
 import { Observable, of } from 'rxjs';
 import { stringToFile, validate } from 'utils';
@@ -22,7 +23,9 @@ export class DisciplinaCadastroComponent {
     private disciplinaService: DisciplinaService,
     private fb: UntypedFormBuilder,
     private router: Router,
-    private activatedRoute: ActivatedRoute
+    private activatedRoute: ActivatedRoute,
+    @Optional() public ref?: DynamicDialogRef,
+    @Optional() public config?: DynamicDialogConfig
   ) {
     this.loadingInit = true;
     this.loadDisciplinaFromParam().subscribe((disciplina) => {
@@ -103,6 +106,10 @@ export class DisciplinaCadastroComponent {
   }
 
   private processaRetorno(disciplina?: Disciplina) {
-    this.navegarParaListagem();
+    if (this.ref) {
+      this.ref.close(disciplina);
+    } else {
+      this.navegarParaListagem();
+    }
   }
 }

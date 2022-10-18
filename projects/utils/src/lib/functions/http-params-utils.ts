@@ -1,9 +1,19 @@
 import { HttpParams } from '@angular/common/http';
 import { LazyLoadEvent } from 'primeng/api';
 
-export function buildSearchParams(evt: LazyLoadEvent, query?: string): HttpParams {
+export function buildSearchParams(evt?: LazyLoadEvent, query?: string): HttpParams {
   let params = new HttpParams();
 
+  if (evt) {
+    addLazyLoadParams(params, evt);
+  }
+  if (query != null) {
+    params = params.append('query', query);
+  }
+  return params;
+}
+
+function addLazyLoadParams(params: HttpParams, evt: LazyLoadEvent) {
   if (evt.first !== undefined && evt.first !== null) {
     const page = (evt.first / (evt.rows || 0)).toFixed(0);
 
@@ -20,8 +30,4 @@ export function buildSearchParams(evt: LazyLoadEvent, query?: string): HttpParam
       params = params.append('sort', `${multiSort.field},${multiSort.order > 0 ? 'asc' : 'desc'}`);
     }
   }
-  if (query) {
-    params = params.append('query', query);
-  }
-  return params;
 }
