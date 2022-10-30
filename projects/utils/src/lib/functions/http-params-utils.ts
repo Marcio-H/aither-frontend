@@ -5,7 +5,7 @@ export function buildSearchParams(evt?: LazyLoadEvent, query?: string): HttpPara
   let params = new HttpParams();
 
   if (evt) {
-    addLazyLoadParams(params, evt);
+    params = addLazyLoadParams(params, evt);
   }
   if (query != null) {
     params = params.append('query', query);
@@ -13,7 +13,7 @@ export function buildSearchParams(evt?: LazyLoadEvent, query?: string): HttpPara
   return params;
 }
 
-function addLazyLoadParams(params: HttpParams, evt: LazyLoadEvent) {
+function addLazyLoadParams(params: HttpParams, evt: LazyLoadEvent): HttpParams {
   if (evt.first !== undefined && evt.first !== null) {
     const page = (evt.first / (evt.rows || 0)).toFixed(0);
 
@@ -30,4 +30,5 @@ function addLazyLoadParams(params: HttpParams, evt: LazyLoadEvent) {
       params = params.append('sort', `${multiSort.field},${multiSort.order > 0 ? 'asc' : 'desc'}`);
     }
   }
+  return params;
 }

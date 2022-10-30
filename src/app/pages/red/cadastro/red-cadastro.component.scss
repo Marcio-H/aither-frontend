@@ -1,0 +1,5 @@
+:host ::ng-deep {
+  .unselectable + .p-autocomplete-token-icon {
+    display: none;
+  }
+}

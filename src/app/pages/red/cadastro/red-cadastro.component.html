@@ -1,0 +1,143 @@
+<div *ngIf="loadingInit" class="flex justify-content-center align-items-center w-full h-full">
+  <p-progressSpinner styleClass="full-page-spinner"></p-progressSpinner>
+</div>
+
+<div *ngIf="!loadingInit" class="t-container mt-3">
+  <form [formGroup]="redForm" (ngSubmit)="submit()">
+    <div class="p-card shadow-none">
+      <div class="col-6">
+        <span class="p-float-label">
+          <input
+            id="titulo-input"
+            type="text"
+            pInputText
+            formControlName="titulo"
+            class="w-full"
+            [class.ng-dirty]="redForm.controls['titulo'].dirty"
+          >
+          <label for="descricao-input">Título *</label>
+        </span>
+      </div>
+      <div class="col-12 flex">
+        <div class="col-5">
+          <span class="p-float-label">
+            <input
+              id="autor-input"
+              type="text"
+              pInputText
+              formControlName="autor"
+              class="w-full"
+              [class.ng-dirty]="redForm.controls['autor'].dirty"
+            >
+            <label for="autor-input">Autor</label>
+          </span>
+        </div>
+        <div class="col-7">
+          <span class="p-float-label">
+            <input
+              id="endereco-input"
+              type="text"
+              pInputText
+              formControlName="endereco"
+              class="w-full"
+              [class.ng-dirty]="redForm.controls['endereco'].dirty"
+            >
+            <label for="endereco-input">Endereço *</label>
+          </span>
+        </div>
+      </div>
+      <div class="col-6">
+        <span class="p-float-label p-input-icon-right w-full">
+          <p-autoComplete
+            inputId="disciplinas-input"
+            [multiple]="true"
+            [suggestions]="disciplinasAvaible"
+            (completeMethod)="disciplinaAutocomplete($event.query)"
+            [field]="$any(disciplinaAutoCompleteConverter)"
+            formControlName="disciplinas"
+            [completeOnFocus]="true"
+            [forceSelection]="true"
+            (onSelect)="filterRepeatedDisciplinas($event)"
+            (onUnselect)="pushUnselectableDisciplinaBack($event)"
+            class="p-fluid"
+          >
+            <ng-template let-disciplina pTemplate="selectedItem">
+              <span [class.unselectable]="disciplina.unselectable">{{disciplinaAutoCompleteConverter(disciplina)}}</span>
+            </ng-template>
+          </p-autoComplete>
+          <label for="disciplinas-input">Disciplinas</label>
+          <i class="pi">
+            <i *ngIf="loadingDisciplinas" class="pi pi-spinner pi-spin mr-1"></i>
+            <i
+              pRipple
+              class="pi pi-plus-circle text-primary cursor-pointer"
+              (click)="openCadastroDisciplina()"
+            ></i>
+          </i>
+        </span>
+      </div>
+      <div class="col-10">
+        <span class="p-float-label p-input-icon-right w-full">
+          <p-autoComplete
+            inputId="conteudos-input"
+            [multiple]="true"
+            [suggestions]="conteudosAvaible"
+            (completeMethod)="conteudoAutocomplete($event.query)"
+            [field]="$any(conteudoAutoCompleteConverter)"
+            formControlName="conteudos"
+            [completeOnFocus]="true"
+            [forceSelection]="true"
+            (onSelect)="pushDisciplinas($event.disciplinas)"
+            (onUnselect)="removeDisciplinas($event.disciplinas)"
+            class="p-fluid"
+          >
+          </p-autoComplete>
+          <label for="conteudos-input">Conteúdo *</label>
+          <i class="pi">
+            <i *ngIf="loadingConteudos" class="pi pi-spinner pi-spin mr-1"></i>
+            <i
+              pRipple
+              class="pi pi-plus-circle text-primary cursor-pointer"
+              (click)="openCadastroConteudo()"
+            ></i>
+          </i>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <span class="p-float-label">
+          <textarea
+            id="descricao-input"
+            pInputTextarea
+            formControlName="descricao"
+            cols="70"
+            [class.ng-dirty]="redForm.controls['descricao'].dirty"
+          ></textarea>
+          <label for="descricao-input">Descrição *</label>
+        </span>
+      </div>
+
+      <div class="col-12">
+        <p-fileUpload
+          #fileUpload
+          [accept]="'image/png'"
+          [multiple]="false"
+          [disabled]="redForm.get('id')?.value == null"
+          [files]="files"
+          [showCancelButton]="false"
+          [showUploadButton]="canUpload"
+          (onSelect)="onFileUploadSelect($event.files)"
+          (onRemove)="removeFile($event.file)"
+          (onBeforeUpload)="uploadRedImagem()"
+        >
+        </p-fileUpload>
+      </div>
+    </div>
+
+    <div class="flex flex-row justify-content-end pt-1 pr-3 pl-3">
+      <ui-button label="Salvar" type="submit"></ui-button>
+    </div>
+  </form>
+</div>
+
+<p-confirmDialog icon="pi pi-check"></p-confirmDialog>

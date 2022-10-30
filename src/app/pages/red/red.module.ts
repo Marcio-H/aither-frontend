@@ -1,13 +1,13 @@
 import { CommonModule } from '@angular/common';
-import { InputTextModule } from 'primeng/inputtext';
 import { NgModule } from '@angular/core';
-import { ReactiveFormsModule } from '@angular/forms';
-import { RedComponent } from './red.component';
 import { RedRoutingModule } from './red-routing.module';
-import { MultiSelectModule } from 'primeng/multiselect';
+import { RedCadastroModule } from './cadastro/red-cadastro.module';
+import { RedService } from './services/red.service';
 
 @NgModule({
-  declarations: [RedComponent],
-  imports: [CommonModule, InputTextModule, MultiSelectModule, ReactiveFormsModule, RedRoutingModule],
+  declarations: [],
+  imports: [CommonModule, RedRoutingModule, RedCadastroModule],
+  exports: [],
+  providers: [RedService],
 })
 export class RedModule {}

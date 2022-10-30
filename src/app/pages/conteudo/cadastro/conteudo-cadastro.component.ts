@@ -1,8 +1,8 @@
 import { ActivatedRoute, Router } from '@angular/router';
-import { Component } from '@angular/core';
+import { Component, Optional } from '@angular/core';
 import { Conteudo } from '../model/conteudo';
 import { ConteudoService } from '../services/conteudo.service';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { DisciplinaAutoComplete, DisciplinaAutoCompletePipe } from '../../disciplina/model/disciplina-auto-complete';
 import { DisciplinaCadastroComponent } from '../../disciplina/cadastro/disciplina-cadastro.component';
 import { DisciplinaService } from '../../disciplina/services/disciplina.service';
@@ -27,7 +27,9 @@ export class ConteudoCadastroComponent {
     private dialogService: DialogService,
     private disciplinaService: DisciplinaService,
     private fb: UntypedFormBuilder,
-    private router: Router
+    private router: Router,
+    @Optional() public ref?: DynamicDialogRef,
+    @Optional() public config?: DynamicDialogConfig
   ) {
     this.loadingInit = true;
     this.loadConteudoFromParam().subscribe((conteudo) => {
@@ -53,7 +55,7 @@ export class ConteudoCadastroComponent {
   openCadastroDisciplina(): void {
     this.dialogService
       .open(DisciplinaCadastroComponent, {
-        width: '70%',
+        width: '40%',
         header: 'Cadastrar nova disciplina',
       })
       .onClose.subscribe((disciplina?: DisciplinaAutoComplete) => {
@@ -116,6 +118,10 @@ export class ConteudoCadastroComponent {
   }
 
   private processaRetorno(conteudo?: Conteudo) {
-    this.navegarParaListagem();
+    if (this.ref) {
+      this.ref.close(conteudo);
+    } else {
+      this.navegarParaListagem();
+    }
   }
 }

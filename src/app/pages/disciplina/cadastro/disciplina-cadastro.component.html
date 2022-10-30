@@ -25,6 +25,7 @@
           (onSelect)="onFileUploadSelect($event.files)"
           [multiple]="false"
           [showUploadButton]="false"
+          [showCancelButton]="false"
           [files]="files"
           (onRemove)="removeFile($event.file)"
           [class.dirty]="disciplinaForm.controls['imagem'].dirty"

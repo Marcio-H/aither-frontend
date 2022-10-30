@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { LazyLoadEvent } from 'primeng/api';
 import { Observable, take } from 'rxjs';
+import { ConteudoAutoComplete } from '../model/conteudo-auto-complete';
 
 @Injectable()
 export class ConteudoService {
@@ -13,6 +14,12 @@ export class ConteudoService {
 
   atualizarConteudo(conteudo: Conteudo): Observable<Conteudo> {
     return this.http.put<Conteudo>(`${this.url}/${conteudo.id}`, conteudo).pipe(take(1));
+  }
+
+  autoComplete(query: string, event?: LazyLoadEvent): Observable<PageResult<ConteudoAutoComplete>> {
+    const params = buildSearchParams(event, query);
+
+    return this.http.get<PageResult<ConteudoAutoComplete>>(`${this.url}/autoComplete`, { params }).pipe(take(1));
   }
 
   buscarConteudoPorId(id: string): Observable<Conteudo> {

@@ -1,8 +1,10 @@
 import { Pipe, PipeTransform } from '@angular/core';
+import { DisciplinaAutoComplete } from '../../disciplina/model/disciplina-auto-complete';
 
 export interface ConteudoAutoComplete {
   id?: string;
   descricao: string;
+  disciplinas: DisciplinaAutoComplete[];
 }
 
 @Pipe({ name: 'conteudoAutoComplete' })
