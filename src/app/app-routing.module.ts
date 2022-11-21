@@ -6,6 +6,10 @@ const routes: Routes = [
   { path: '', component: MainComponent },
   { path: 'red', loadChildren: () => import('./pages/red/red.module').then((m) => m.RedModule) },
   {
+    path: 'redDetails/:id',
+    loadChildren: () => import('./pages/main/details/details.module').then((m) => m.DetailsModule),
+  },
+  {
     path: 'disciplina',
     loadChildren: () => import('./pages/disciplina/disciplina.module').then((m) => m.DisciplinaModule),
   },

@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'NULL',
+  apiUrl: 'https://aither-backend-deploy.herokuapp.com',
 };

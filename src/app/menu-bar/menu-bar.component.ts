@@ -4,7 +4,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { LoginRegisterComponent } from './login-register/login-register.component';
 import { MenuItem } from 'primeng/api';
-import { RecursoService } from '../services/recurso.service';
+import { PermissionService } from '../services/permission.service';
 
 @Component({
   selector: 'app-menu-bar',
@@ -13,22 +13,27 @@ import { RecursoService } from '../services/recurso.service';
   providers: [DialogService],
 })
 export class MenuBarComponent implements OnInit, OnDestroy {
-  itens!: MenuItem[];
+  itens: MenuItem[] = this.defaultItens;
   loginRegisterRef?: DynamicDialogRef;
   isAuthenticated!: boolean;
 
   constructor(
     private authService: AuthService,
     private dialogService: DialogService,
-    private recursoService: RecursoService
+    private readonly permissionService: PermissionService
   ) {}
 
   ngOnInit(): void {
-    this.itens = this.buildItens();
-    this.isAuthenticated = this.authService.isAthenticated();
     this.authService.onChangeAuthentication().subscribe((it) => {
       this.isAuthenticated = it;
-      this.loadRecursos();
+      this.permissionService.menuAvaible.subscribe((resourcesItens) => {
+        const menu = this.defaultItens;
+
+        if (resourcesItens.length) {
+          menu.push({ label: 'Recursos', items: resourcesItens });
+        }
+        this.itens = menu;
+      });
     });
   }
 
@@ -44,38 +49,7 @@ export class MenuBarComponent implements OnInit, OnDestroy {
     this.authService.doLogout();
   }
 
-  private buildItens(recursos?: MenuItem): MenuItem[] {
-    const itens: MenuItem[] = [{ label: 'Sobre' }];
-
-    if (recursos) {
-      itens.push(recursos);
-    }
-    return itens;
-  }
-
-  private loadRecursos(): void {
-    this.recursoService
-      .getRecursos()
-      .pipe(
-        catchError((e) => {
-          this.itens = this.buildItens();
-          throw e;
-        })
-      )
-      .subscribe((recursos) => {
-        const recursoItem: MenuItem = {
-          label: 'Recursos',
-          items: [],
-        };
-
-        recursos.forEach((recurso) => {
-          recursoItem.items?.push({
-            id: recurso.id,
-            label: recurso.label,
-            routerLink: 'red',
-          });
-        });
-        this.itens = this.buildItens(recursoItem);
-      });
+  private get defaultItens(): MenuItem[] {
+    return [{ label: 'Sobre' }];
   }
 }

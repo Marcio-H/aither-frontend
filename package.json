@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "npm i && ng build utils && ng build aither-ui && ng build",
     "lint:fix": "eslint ./ --ext .ts --fix && npm run style:fix",
     "style:fix": "prettier ./projects --write --ignore-unknown",
     "watch": "ng build --watch --configuration development",

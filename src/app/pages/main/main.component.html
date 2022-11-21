@@ -1,1 +1,57 @@
-<p>main works!</p>
+<p-dataView
+  #dv
+  dataKey="id"
+  [value]="recReds"
+  [paginator]="true"
+  [rows]="12"
+  [rowsPerPageOptions]="[12, 28, 40]"
+  layout="grid"
+  currentPageReportTemplate="Visualizando {first} à {last} de {totalRecords} reds(s)"
+  [showCurrentPageReport]="true"
+  [totalRecords]="totalRecords"
+  (lazy)="true"
+  (onLazyLoad)="loadRecRedsMainPage($event)"
+>
+  <ng-template pTemplate="header">
+      <div class="flex flex-column md:flex-row md:justify-content-between">
+          <span class="p-float-label p-input-icon-left w-full mb-2 md:mb-0">
+              <i class="pi pi-search"></i>
+              <input
+                id="input-search"
+                type="search"
+                pInputText
+                autocomplete="off"
+                class="w-full p-inputtext-sm"
+                [(ngModel)]="buscaQuery"
+              >
+              <label for="input-search">Buscar por título ou autor</label>
+              <!-- TODO: implementar busca disciplina, conteúdo ou usuário criador -->
+          </span>
+      </div>
+  </ng-template>
+  <ng-template let-recMainPage pTemplate="gridItem">
+      <div class="col-12 md:col-4 lg:col-3 p-4">
+        <p-panel header="RED">
+          <ng-template pTemplate="icons">
+            <ui-button
+              icon="pi pi-pencil"
+              outlined
+              (click)="editar(recMainPage)"
+            ></ui-button>
+            <ui-button
+              icon="pi pi-trash"
+              outlined
+              class="ml-1"
+              (click)="excluir(recMainPage)"
+            ></ui-button>
+          </ng-template>
+
+          <div class="w-full text-center">
+            <img [src]="recMainPage.imagem" class="w-8 h-12rem"/>
+            <h4>{{recMainPage.titulo}}</h4>
+            <ui-button icon="pi pi-search" (click)="detailsRed(recMainPage.id)"></ui-button>
+          </div>
+        </p-panel>
+      </div>
+  </ng-template>
+</p-dataView>

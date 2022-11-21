@@ -1,19 +1,19 @@
+import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Component, ViewChildren } from '@angular/core';
-import { DialogService } from 'primeng/dynamicdialog';
-import { FileUpload } from 'primeng/fileupload';
-import { Observable, of } from 'rxjs';
-import { validate } from 'utils';
-import { AbstractControl, UntypedFormBuilder, UntypedFormGroup, ValidatorFn, Validators } from '@angular/forms';
-import { RedService } from '../services/red.service';
-import { Red } from '../model/red';
-import { DisciplinaAutoComplete, DisciplinaAutoCompletePipe } from '../../disciplina/model/disciplina-auto-complete';
-import { DisciplinaService } from '../../disciplina/services/disciplina.service';
-import { DisciplinaCadastroComponent } from '../../disciplina/cadastro/disciplina-cadastro.component';
+import { ConfirmationService, MessageService } from 'primeng/api';
 import { ConteudoAutoComplete, ConteudoAutoCompletePipe } from '../../conteudo/model/conteudo-auto-complete';
 import { ConteudoCadastroComponent } from '../../conteudo/cadastro/conteudo-cadastro.component';
 import { ConteudoService } from '../../conteudo/services/conteudo.service';
-import { ConfirmationService, MessageService } from 'primeng/api';
+import { DialogService } from 'primeng/dynamicdialog';
+import { DisciplinaAutoComplete, DisciplinaAutoCompletePipe } from '../../disciplina/model/disciplina-auto-complete';
+import { DisciplinaCadastroComponent } from '../../disciplina/cadastro/disciplina-cadastro.component';
+import { DisciplinaService } from '../../disciplina/services/disciplina.service';
+import { FileUpload } from 'primeng/fileupload';
+import { map, Observable, of } from 'rxjs';
+import { Red } from '../model/red';
+import { RedService } from '../services/red.service';
+import { stringToFile, validate } from 'utils';
 
 @Component({
   selector: 'app-red-cadastro',
@@ -35,9 +35,9 @@ export class RedCadastroComponent {
   @ViewChildren('fileUpload') fileUpload!: FileUpload;
 
   constructor(
-    private redService: RedService,
-    private fb: UntypedFormBuilder,
-    private activatedRoute: ActivatedRoute,
+    private readonly redService: RedService,
+    private readonly fb: UntypedFormBuilder,
+    private readonly activatedRoute: ActivatedRoute,
     private readonly confirmationService: ConfirmationService,
     private readonly conteudoService: ConteudoService,
     private readonly disciplinaService: DisciplinaService,
@@ -219,7 +219,14 @@ export class RedCadastroComponent {
     const redId = this.activatedRoute.snapshot.paramMap.get('id');
 
     if (redId) {
-      return this.redService.buscarRedPorId(redId);
+      return this.redService.buscarRedPorId(redId).pipe(
+        map((red) => {
+          return {
+            ...red,
+            imagem: stringToFile(red.imagem, `${red.titulo.toLowerCase()}.png`),
+          };
+        })
+      );
     }
     return of(undefined);
   }
